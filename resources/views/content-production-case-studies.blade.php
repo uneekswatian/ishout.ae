@@ -1,6 +1,7 @@
 @extends('layouts.website.layout')
 @section('title')iShout Media - Content Production Case Studies @stop
 
+@section('content')
     <header class="masthead text-white gradientGreen">
         <div class="container">
             <div class="whitePattern"></div>
@@ -124,6 +125,7 @@
         </div>    
     </div> 
 @stop
+
 @section('js')
     <script>
         function sendMail(){
