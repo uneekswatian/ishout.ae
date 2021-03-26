@@ -225,28 +225,73 @@
                     <div class="col-lg-8">
                         <h2 class="d-block text-center">Drop Us a Line</h2>
                         <br>
-                        <form>
+                        {{ Form::open(['url' => '/send-mail', 'method' => 'post', 'class' => 'form-horizontal' ]) }}
                             <div class="row">
                                 <div class="form-group col-lg-4">
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Name">
+                                    {{ Form::text('name', old('name'), ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Name', 'required' => true]) }}
                                 </div>
                                 <div class="form-group col-lg-4">
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                                    {{ Form::email('email', old('email'), ['id' => 'email', 'class' => 'form-control', 'placeholder' => 'Email', 'required' => true]) }}
                                 </div>
                                 <div class="form-group col-lg-4">
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Subject">
+                                    {{ Form::text('subject', old('subject'), ['id' => 'subject', 'class' => 'form-control', 'placeholder' => 'Subject', 'required' => true]) }}
                                 </div>
                                 <div class="form-group col-lg-12 toppadding">
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Message" rows="1"></textarea>
+                                    {{ Form::textarea('message', old('message'), ['id' => 'message', 'class' => 'form-control', 'rows' => 1, 'placeholder' => 'Message', 'required' => true]) }}
                                 </div>
                                 <div class="form-group col-lg-12 text-center toppadding">
-                                    <button type="submit" class="btn btn-green-reverse">&nbsp;&nbsp; Send &nbsp;&nbsp;</button>
+                                    <button type="button" onclick="sendMail()" class="btn btn-green-reverse">&nbsp;&nbsp; Send &nbsp;&nbsp;</button>
                                 </div>
                             </div>
-                        </form>
+                        {{ Form::close() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@stop
+@section('js')
+    <script>
+        function sendMail(){
+            if (validate() !== false){
+                var url = "{{ url('send-mail') }}";
+                var params = {
+                    'name': $('#name').val(),
+                    'email': $('#email').val(),
+                    'subject': $("#subject").val(),
+                    'message': $("#message").val()
+                };
+                $.post(url, params, function(response){
+                    alert("Thank you for your inquiry, will get back to you shortly.")
+                });
+            }
+        }
+
+        function validate(){
+
+            if ($('#name').val() == ""){
+                $('#name').focus();
+                alert("Please enter your name");
+                return false;
+            }
+
+            if ($('#email').val() == ""){
+                $('#email').focus();
+                alert("Please enter your email");
+                return false;
+            }
+
+            if ($('#subject').val() == ""){
+                $('#subject').focus();
+                alert("Please enter your subject");
+                return false;
+            }
+
+            if ($('#message').val() == ""){
+                $('#message').focus();
+                alert("Please enter your message");
+                return false;
+            }
+        }
+    </script>
 @stop

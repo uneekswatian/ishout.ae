@@ -65,7 +65,7 @@ class HomeController extends Controller
     public function sendEmail(Request $request)
     {
         // send email to management
-        Mail::send("emails.frontend.contact-us", ['request' => $request], function ($m) use ($request) {
+        Mail::send("email-templates.contact-us", ['request' => $request], function ($m) use ($request) {
 
             $m->from(config('emails.from_email'), config('emails.app_name'));
             $m->subject("Query submitted - {$request->get('name')}.");

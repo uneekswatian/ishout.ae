@@ -45,27 +45,25 @@
                         <h2 class="d-block text-center">Drop Us a Line</h2>
                         <br>
                         {{ Form::open(['url' => '/send-mail', 'method' => 'post', 'class' => 'form-horizontal' ]) }}
-                                <div class="row">
-                                    <div class="form-group col-lg-4">
-                                        {{ Form::text('name', old('name'), ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Name', 'required' => true]) }}
-                                    </div>
-                                    <div class="form-group col-lg-4">
-                                        {{ Form::email('email', old('email'), ['id' => 'email', 'class' => 'form-control', 'placeholder' => 'Email', 'required' => true]) }}
-                                    </div>
-                                    <div class="form-group col-lg-4">
-                                        {{ Form::text('subject', old('subject'), ['id' => 'subject', 'class' => 'form-control', 'placeholder' => 'Subject', 'required' => true]) }}
-                                    </div>
-                                    <div class="form-group col-lg-12 toppadding">
-                                        {{ Form::textarea('message', old('message'), ['id' => 'message', 'class' => 'form-control', 'rows' => 1, 'placeholder' => 'Message', 'required' => true]) }}
-                                    </div>
-                                    <div class="form-group col-lg-12 text-center toppadding">
-                                        <button type="button" onclick="sendMail()" class="btn btn-green-reverse">&nbsp;&nbsp; Send &nbsp;&nbsp;</button>
-                                    </div>
+                            <div class="row">
+                                <div class="form-group col-lg-4">
+                                    {{ Form::text('name', old('name'), ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Name', 'required' => true]) }}
                                 </div>
-                            {{ Form::close() }}
-
+                                <div class="form-group col-lg-4">
+                                    {{ Form::email('email', old('email'), ['id' => 'email', 'class' => 'form-control', 'placeholder' => 'Email', 'required' => true]) }}
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    {{ Form::text('subject', old('subject'), ['id' => 'subject', 'class' => 'form-control', 'placeholder' => 'Subject', 'required' => true]) }}
+                                </div>
+                                <div class="form-group col-lg-12 toppadding">
+                                    {{ Form::textarea('message', old('message'), ['id' => 'message', 'class' => 'form-control', 'rows' => 1, 'placeholder' => 'Message', 'required' => true]) }}
+                                </div>
+                                <div class="form-group col-lg-12 text-center toppadding">
+                                    <button type="button" onclick="sendMail()" class="btn btn-green-reverse">&nbsp;&nbsp; Send &nbsp;&nbsp;</button>
+                                </div>
+                            </div>
+                        {{ Form::close() }}
                     </div>
-
                 </div>
             </div>
         </div>
@@ -74,8 +72,7 @@
 @section('js')
     <script>
         function sendMail(){
-
-            if (validate()){
+            if (validate() !== false){
                 var url = "{{ url('send-mail') }}";
                 var params = {
                     'name': $('#name').val(),
