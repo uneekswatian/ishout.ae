@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', 'HomeController@index');
 // Route::get('/login', 'HomeController@platformLogin');
+Route::get('/', 'HomeController@index');
 Route::get('/about-us', 'HomeController@aboutUs');
 Route::get('/influencers-marketing', 'HomeController@influencersMarketing');
 Route::get('/social-media-management', 'HomeController@socialMediaManagement');
@@ -29,3 +29,6 @@ Route::get('/content-production-case-studies', 'HomeController@contentProduction
 Route::get('/contact-us', 'HomeController@contactUs');
 Route::post('/send-mail', 'HomeController@sendEmail');
 Route::post('/contact-us', 'HomeController@sendEmail');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
